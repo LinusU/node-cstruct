@@ -1,0 +1,19 @@
+{
+  "name": "cstruct",
+  "version": "0.0.0",
+  "files": [ "index.js", "lib/" ],
+  "devDependencies": {
+    "babel": "^5.8.12",
+    "babel-eslint": "^4.0.5",
+    "mocha": "^2.2.5",
+    "standard": "^4.5.4"
+  },
+  "scripts": {
+    "test": "standard && mocha --compilers js:babel/register",
+    "build": "babel src --out-dir lib",
+    "prepublish": "npm run build"
+  },
+  "standard": {
+    "parser": "babel-eslint"
+  }
+}
