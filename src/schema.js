@@ -1,5 +1,3 @@
-let assert = require('assert')
-
 let read = require('./read')
 let write = require('./write')
 
@@ -31,11 +29,11 @@ export default class Schema {
     return result
   }
   writeArray (data, buffer = null, offset = 0) {
-    assert(Array.isArray(data))
+    if (!Array.isArray(data)) throw new TypeError('expected data to be an array')
 
     if (buffer === null) {
-      assert(offset === 0)
       buffer = new Buffer(this.byteLength * data.length)
+      offset = 0
     }
 
     for (let i = 0; i < data.length; i++) {

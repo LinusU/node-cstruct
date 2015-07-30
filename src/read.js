@@ -1,8 +1,8 @@
 let types = require('./types')
-let assert = require('assert')
+let checkOffset = require('./check-offset')
 
 export default function read (schema, buffer, offset = 0) {
-  assert(offset >= 0 && buffer.length >= offset + schema.byteLength)
+  checkOffset(offset, schema.byteLength, buffer.length)
 
   let result = {}
 

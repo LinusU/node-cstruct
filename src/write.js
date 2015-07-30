@@ -1,5 +1,5 @@
 let types = require('./types')
-let assert = require('assert')
+let checkOffset = require('./check-offset')
 
 function innerWrite (schema, data, buffer, offset) {
   function getType (name) {
@@ -28,10 +28,9 @@ function innerWrite (schema, data, buffer, offset) {
 
 export default function write (schema, data, targetBuffer = null, targetOffset = 0) {
   if (targetBuffer) {
-    assert(targetOffset >= 0 && targetBuffer.length >= targetOffset + schema.byteLength)
+    checkOffset(targetOffset, schema.byteLength, targetBuffer.length)
     return innerWrite(schema, data, targetBuffer, targetOffset)
   } else {
-    assert(targetOffset === 0)
     return innerWrite(schema, data, new Buffer(schema.byteLength), 0)
   }
 }
