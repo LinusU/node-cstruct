@@ -1,7 +1,14 @@
 {
   "name": "cstruct",
   "version": "0.0.0",
+  "license": "MIT",
+  "author": "Linus Unnebäck <linus@folkdatorn.se>",
+  "main": "index.js",
   "files": [ "index.js", "lib/" ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/LinusU/node-cstruct.git"
+  },
   "devDependencies": {
     "babel": "^5.8.12",
     "babel-eslint": "^4.0.5",
