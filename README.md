@@ -51,6 +51,11 @@ The length of the struct in bytes.
 An array of the attributes of the struct. Each attribute is an object with the
 following properties: `name`, `type`, `offset`, `isArray`, `count`.
 
+### `Schema.linkedTypes`
+
+A `Map` with other types used inside of this type. The key is the name of the
+struct and the value is a `Schema`.
+
 ### `Schema.read(buffer[, offset])`
 
 Read the struct from a buffer into a structured javascript object. Optionally
@@ -60,7 +65,40 @@ supply an offset to start reading at that position.
 
 Write the javascript object `data` into a buffer. If no `targetBuffer` is
 supplied, a new one will be created with the same length as the struct.
-Optionally an offset to start writing at that position.
+Optionally supply an offset to start writing at that position.
+
+### `Schema.readArray(count, buffer[, offset])`
+
+Read `count` number of structs from a buffer into an array. Optionally
+supply an offset to start reading at that position.
+
+### `Schema.writeArray(data[, targetBuffer[, targetOffset]])`
+
+Write an array of javascript objects into a buffer. If no `targetBuffer` is
+supplied, a new one will be created with the same length as the structs combined
+size. Optionally supply an offset to start writing at that position.
+
+### `struct.read(typeName, buffer[, offset])`
+
+Read a primitive type from a buffer. Optionally supply an offset to start
+reading at that position.
+
+### `struct.write(typeName, data[, targetBuffer[, targetOffset]])`
+
+Write a primitive type into a buffer. If no `targetBuffer` is supplied, a new
+one will be created with the same length as the type. Optionally supply an
+offset to start writing at that position.
+
+### `struct.readArray(typeName, count, buffer[, offset])`
+
+Read `count` number of primitive types from a buffer into an array. Optionally
+supply an offset to start reading at that position.
+
+### `struct.writeArray(typeName, data[, targetBuffer[, targetOffset]])`
+
+Write an array of primitive types into a buffer. If no `targetBuffer` is
+supplied, a new one will be created with the same length as the primitive types
+combined size. Optionally supply an offset to start writing at that position.
 
 ## Compatibility
 

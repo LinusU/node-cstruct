@@ -3,11 +3,11 @@
 let assert = require('assert')
 
 let parse = require('../src/parse')
-let fixtures = require('./_fixtures')
+const FIXTURES = require('./fixtures/struct')
 
 describe('parse', function () {
-  fixtures.forEach(function (info) {
-    it('parses ' + info.name, function () {
+  FIXTURES.forEach(function (info) {
+    it('should parse ' + info.name, function () {
       let { linkedTypes, attributes, byteLength } = info
       let actual = parse(info.struct)
       let expected = { linkedTypes, attributes, byteLength }
