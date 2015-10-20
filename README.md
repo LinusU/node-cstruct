@@ -100,6 +100,12 @@ Write an array of primitive types into a buffer. If no `targetBuffer` is
 supplied, a new one will be created with the same length as the primitive types
 combined size. Optionally supply an offset to start writing at that position.
 
+## Endianness
+
+By default reading and writing is done in the current computer's endianness.
+All function can be postfixed with `LE` or `BE` to force a specific endianness,
+e.g. `struct.readBE('uint32_t', buffer)`.
+
 ## Compatibility
 
 Template strings is enabled by default in [io.js][2] but not in [Node.js][3]
