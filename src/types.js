@@ -2,63 +2,95 @@ let types = new Map()
 export default types
 
 {
-  function readInt (bytes) {
+  function readIntLE (bytes) {
     return function (buffer, offset) {
       return buffer.readIntLE(offset, bytes, true)
     }
   }
+  function readIntBE (bytes) {
+    return function (buffer, offset) {
+      return buffer.readIntBE(offset, bytes, true)
+    }
+  }
 
-  function writeInt (bytes) {
+  function writeIntLE (bytes) {
     return function (value, buffer, offset) {
       buffer.writeIntLE(value, offset, bytes, true)
     }
   }
+  function writeIntBE (bytes) {
+    return function (value, buffer, offset) {
+      buffer.writeIntBE(value, offset, bytes, true)
+    }
+  }
 
-  types.set('int8', { byteLength: 1, read: readInt(1), write: writeInt(1) })
-  types.set('int16', { byteLength: 2, read: readInt(2), write: writeInt(2) })
-  types.set('int32', { byteLength: 4, read: readInt(4), write: writeInt(4) })
+  types.set('int8', { byteLength: 1, readLE: readIntLE(1), writeLE: writeIntLE(1), readBE: readIntBE(1), writeBE: writeIntBE(1) })
+  types.set('int16', { byteLength: 2, readLE: readIntLE(2), writeLE: writeIntLE(2), readBE: readIntBE(2), writeBE: writeIntBE(2) })
+  types.set('int32', { byteLength: 4, readLE: readIntLE(4), writeLE: writeIntLE(4), readBE: readIntBE(4), writeBE: writeIntBE(4) })
 }
 
 {
-  function readUInt (bytes) {
+  function readUIntLE (bytes) {
     return function (buffer, offset) {
       return buffer.readUIntLE(offset, bytes, true)
     }
   }
+  function readUIntBE (bytes) {
+    return function (buffer, offset) {
+      return buffer.readUIntBE(offset, bytes, true)
+    }
+  }
 
-  function writeUInt (bytes) {
+  function writeUIntLE (bytes) {
     return function (value, buffer, offset) {
       buffer.writeUIntLE(value, offset, bytes, true)
     }
   }
+  function writeUIntBE (bytes) {
+    return function (value, buffer, offset) {
+      buffer.writeUIntBE(value, offset, bytes, true)
+    }
+  }
 
-  types.set('uint8', { byteLength: 1, read: readUInt(1), write: writeUInt(1) })
-  types.set('uint16', { byteLength: 2, read: readUInt(2), write: writeUInt(2) })
-  types.set('uint32', { byteLength: 4, read: readUInt(4), write: writeUInt(4) })
+  types.set('uint8', { byteLength: 1, readLE: readUIntLE(1), writeLE: writeUIntLE(1), readBE: readUIntBE(1), writeBE: writeUIntBE(1) })
+  types.set('uint16', { byteLength: 2, readLE: readUIntLE(2), writeLE: writeUIntLE(2), readBE: readUIntBE(2), writeBE: writeUIntBE(2) })
+  types.set('uint32', { byteLength: 4, readLE: readUIntLE(4), writeLE: writeUIntLE(4), readBE: readUIntBE(4), writeBE: writeUIntBE(4) })
 }
 
 {
-  function readFloat (buffer, offset) {
+  function readFloatLE (buffer, offset) {
     return buffer.readFloatLE(offset, true)
   }
-
-  function writeFloat (value, buffer, offset) {
-    buffer.writeFloatLE(value, offset, true)
+  function readFloatBE (buffer, offset) {
+    return buffer.readFloatBE(offset, true)
   }
 
-  types.set('float', { byteLength: 4, read: readFloat, write: writeFloat })
+  function writeFloatLE (value, buffer, offset) {
+    buffer.writeFloatLE(value, offset, true)
+  }
+  function writeFloatBE (value, buffer, offset) {
+    buffer.writeFloatBE(value, offset, true)
+  }
+
+  types.set('float', { byteLength: 4, readLE: readFloatLE, writeLE: writeFloatLE, readBE: readFloatBE, writeBE: writeFloatBE })
 }
 
 {
-  function readDouble (buffer, offset) {
+  function readDoubleLE (buffer, offset) {
     return buffer.readDoubleLE(offset, true)
   }
-
-  function writeDouble (value, buffer, offset) {
-    buffer.writeDoubleLE(value, offset, true)
+  function readDoubleBE (buffer, offset) {
+    return buffer.readDoubleBE(offset, true)
   }
 
-  types.set('double', { byteLength: 8, read: readDouble, write: writeDouble })
+  function writeDoubleLE (value, buffer, offset) {
+    buffer.writeDoubleLE(value, offset, true)
+  }
+  function writeDoubleBE (value, buffer, offset) {
+    buffer.writeDoubleBE(value, offset, true)
+  }
+
+  types.set('double', { byteLength: 8, readLE: readDoubleLE, writeLE: writeDoubleLE, readBE: readDoubleBE, writeBE: writeDoubleBE })
 }
 
 {
@@ -70,7 +102,7 @@ export default types
     buffer.writeUInt8(value ? 1 : 0, offset, true)
   }
 
-  types.set('bool', { byteLength: 1, read: readBool, write: writeBool })
+  types.set('bool', { byteLength: 1, readLE: readBool, writeLE: writeBool, readBE: readBool, writeBE: writeBool })
 }
 
 // Aliases
