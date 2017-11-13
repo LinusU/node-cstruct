@@ -1,5 +1,22 @@
+'use strict'
+
+/**
+ * @typedef Example
+ * @property {string} hexLE
+ * @property {string} hexBE
+ * @property {any} value
+ */
+
+/**
+ * @typedef Fixture
+ * @property {string} name
+ * @property {Example[]} examples
+ */
+
+/**
+ * @type {Fixture[]}
+ */
 let fixtures = []
-export default fixtures
 
 fixtures.push({
   name: 'int8',
@@ -128,3 +145,5 @@ fixtures.push({
     { hexLE: '01', hexBE: '01', value: true }
   ]
 })
+
+module.exports = fixtures

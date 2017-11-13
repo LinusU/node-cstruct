@@ -1,70 +1,72 @@
+'use strict'
+
 /* eslint-env mocha */
 
-let assert = require('assert')
-let struct = require('../src/api')
+const assert = require('assert')
+const struct = require('../')
 
-describe('api', function () {
-  it('should work with string templates', function () {
-    let legs = 6
-    let eyes = 2
+describe('api', () => {
+  it('should work with string templates', () => {
+    const legs = 6
+    const eyes = 2
 
-    let Animal = struct `
+    const Animal = struct`
       uint8 legs, eyes;
     `
 
-    let expected = new Buffer([ legs, eyes ])
-    let actual = Animal.write({ legs, eyes })
+    const expected = Buffer.from([ legs, eyes ])
+    const actual = Animal.write({ legs, eyes })
 
     assert.deepEqual(actual, expected)
   })
 
-  it('should work with values in string templates', function () {
-    let legs = 6
-    let eyes = 2
-    let a = 'legs'
-    let b = 'eyes'
+  it('should work with values in string templates', () => {
+    const legs = 6
+    const eyes = 2
+    const a = 'legs'
+    const b = 'eyes'
 
-    let Animal = struct `
+    const Animal = struct`
       uint8 ${a}, ${b};
     `
 
-    let expected = new Buffer([ legs, eyes ])
-    let actual = Animal.write({ legs, eyes })
+    const expected = Buffer.from([ legs, eyes ])
+    const actual = Animal.write({ legs, eyes })
 
     assert.deepEqual(actual, expected)
   })
 
-  it('should handle nested structs', function () {
-    let A = struct `
+  it('should handle nested structs', () => {
+    const A = struct`
       uint8 foo;
     `
-    let B = struct `
+    const B = struct`
       uint8 bar;
     `
-    let C = struct `
+    const C = struct`
       ${A} a;
       ${B} b;
     `
 
-    let a = { foo: 8 }
-    let b = { bar: 6 }
-    let expected = new Buffer([ a.foo, b.bar ])
-    let actual = C.write({ a, b })
+    const a = { foo: 8 }
+    const b = { bar: 6 }
+    const expected = Buffer.from([ a.foo, b.bar ])
+    const actual = C.write({ a, b })
 
     assert.deepEqual(actual, expected)
   })
 
-  it('should work with the example from the readme', function () {
-    const Color = struct `
+  it('should work with the example from the readme', () => {
+    const Color = struct`
       uint8 r, g, b;
     `
-    const Point = struct `
+    const Point = struct`
       uint8 x, y;
       ${Color} color;
     `
 
-    let raw = new Buffer('7823ff00ff', 'hex')
-    let data = { x: 120, y: 35, color: { r: 255, g: 0, b: 255 } }
+    const raw = Buffer.from('7823ff00ff', 'hex')
+    const data = { x: 120, y: 35, color: { r: 255, g: 0, b: 255 } }
 
     assert.deepEqual(Point.read(raw), data)
     assert.deepEqual(Point.write(data), raw)

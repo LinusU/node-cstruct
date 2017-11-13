@@ -1,18 +1,20 @@
+'use strict'
+
 /* eslint-env mocha */
 
-let assert = require('assert')
+const assert = require('assert')
 
-let parse = require('../src/parse')
+const parse = require('../lib/parse')
 const FIXTURES = require('./fixtures/struct')
 
-describe('parse', function () {
-  FIXTURES.forEach(function (info) {
-    it('should parse ' + info.name, function () {
-      let { linkedTypes, attributes, byteLength } = info
-      let actual = parse(info.struct)
-      let expected = { linkedTypes, attributes, byteLength }
+describe('parse', () => {
+  for (const info of FIXTURES) {
+    it(`should parse ${info.name}`, () => {
+      const { linkedTypes, attributes, byteLength } = info
+      const actual = parse(info.struct)
+      const expected = { linkedTypes, attributes, byteLength }
 
       assert.deepEqual(actual, expected)
     })
-  })
+  }
 })

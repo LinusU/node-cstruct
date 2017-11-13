@@ -11,24 +11,24 @@ npm install --save cstruct
 ## Usage
 
 ```javascript
-let struct = require('cstruct')
+const struct = require('cstruct')
 
-const Color = struct `
+const Color = struct`
   uint8 r, g, b;
 `
 
-const Point = struct `
+const Point = struct`
   uint8 x, y;
   ${Color} color;
 `
 
 // Read from buffer
-let raw = new Buffer('7823ff00ff', 'hex')
-let data = Point.read(raw)
+const raw = Buffer.from('7823ff00ff', 'hex')
+const data = Point.read(raw)
 
 // Write to buffer
-let data = { x: 120, y: 35, color: { r: 255, g: 0, b: 255 } }
-let raw = Point.write(data)
+const data = { x: 120, y: 35, color: { r: 255, g: 0, b: 255 } }
+const raw = Point.write(data)
 ```
 
 ## API

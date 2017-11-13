@@ -1,5 +1,35 @@
+'use strict'
+
+/**
+ * @typedef Example
+ * @property {string} hexLE
+ * @property {string} hexBE
+ * @property {any} data
+ */
+
+/**
+ * @typedef Attribute
+ * @property {string} name
+ * @property {string} type
+ * @property {number} offset
+ * @property {boolean} isArray
+ * @property {number} count
+ */
+
+/**
+ * @typedef Fixture
+ * @property {string} name
+ * @property {number} byteLength
+ * @property {Example[]} examples
+ * @property {Map} linkedTypes
+ * @property {Attribute[]} attributes
+ * @property {string} struct
+ */
+
+/**
+ * @type {Fixture[]}
+ */
 let fixtures = []
-export default fixtures
 
 fixtures.push({
   name: 'PointWithFlags',
@@ -120,3 +150,5 @@ fixtures.push({
     float64 b;
   `
 })
+
+module.exports = fixtures
